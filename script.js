@@ -10,18 +10,16 @@ const Player = (userName) => {
 }
 
 const gameBoard = (() => {
-    const boardElements = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const boardElements = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
     const setBoard = () => {
         let i = 0;
         while(boardElements[i]){
             const boardElement = document.createElement('div');
             const boardElemenValue = document.createElement('p');
-            boardElement.dataset.index = boardElements[i];
-            if(boardElements[i] != 'number'){
-                boardElemenValue.textContent = boardElements[i];
-            }
+            boardElement.dataset.index = i;
+            boardElemenValue.textContent = boardElements[i];
             boardElement.appendChild(boardElemenValue);
-            boardElement.addEventListener('click', boardElementClicked.bind(this, boardElement.dataset.index - 1));
+            boardElement.addEventListener('click', boardElementClicked.bind(this, boardElement.dataset.index));
             board.appendChild(boardElement);
             i++;
         }
@@ -39,8 +37,8 @@ const gameBoard = (() => {
     
     function boardElementClicked(elementIndex) {
         console.log("element was clicked");
+        updateBoard(elementIndex, 'X');
         resetBoard();
-        updateBoard(elementIndex, "x");
         setBoard();
     }
     
