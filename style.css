@@ -23,7 +23,12 @@ body h1 {
     cursor: pointer;
 }
 
-#startGame {
+#buttons {
+    display: flex;
+    justify-content: center;
+}
+
+#startGame, #resetGame {
     width: 100px;
     margin: 50px;
     padding: 10px;

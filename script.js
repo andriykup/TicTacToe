@@ -34,6 +34,40 @@ const gameBoard = (() => {
             board.firstChild.remove();
         }
     }
+
+    function tieCheck(){
+        let tieCheck = 0; //if it stay 0, its a tie.
+        for(let i = 0; boardElements[i]; i++){
+            if(boardElements[i] == " "){
+                tieCheck = 1;
+            }
+        }
+        //declaring tie if it is a case
+        if(tieCheck == 0){
+            console.log("tie");
+        }
+    }
+
+    function winnerCheck(){
+        tieCheck();
+        if(boardElements[0] == boardElements[1] && boardElements[1] == boardElements[2] && boardElements[1] != " "){
+            console.log("winner");
+        }else if(boardElements[3] == boardElements[4] && boardElements[4] == boardElements[5] && boardElements[3] != " "){
+            console.log("winner");
+        }else if(boardElements[6] == boardElements[7] && boardElements[7] == boardElements[8] && boardElements[6] != " "){
+            console.log("winner");
+        }else if(boardElements[0] == boardElements[3] && boardElements[3] == boardElements[6] && boardElements[6] != " "){
+            console.log("winner");
+        }else if(boardElements[1] == boardElements[4] && boardElements[4] == boardElements[7] && boardElements[7] != " "){
+            console.log("winner");
+        }else if(boardElements[2] == boardElements[5] && boardElements[5] == boardElements[8] && boardElements[8] != " "){
+            console.log("winner");
+        }else if(boardElements[0] == boardElements[4] && boardElements[4] == boardElements[8] && boardElements[8] != " "){
+            console.log("winner");
+        }else if(boardElements[2] == boardElements[4] && boardElements[4] == boardElements[6] && boardElements[6] != " "){
+            console.log("winner");
+        }
+    }
     
     let currentPlayer;
     function boardElementClicked(elementIndex) {
@@ -55,6 +89,7 @@ const gameBoard = (() => {
         }
         resetBoard();
         setBoard();
+        winnerCheck();
     }
     
     return {
