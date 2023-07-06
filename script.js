@@ -1,6 +1,9 @@
 const board = document.getElementById('gameBoard');
 const startButton = document.getElementById('startGame');
+const resetButton = document.getElementById('resetGame');
+
 startButton.addEventListener('click', startgame);
+resetButton.addEventListener('click', resetGame);
 
 let player1; //palyer declaration
 let player2; //player declaration
@@ -10,7 +13,7 @@ const Player = (userName, mark) => {
 }
 
 const gameBoard = (() => {
-    const boardElements = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
+    let boardElements = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
     const setBoard = () => {
         let i = 0;
         while(boardElements[i]){
@@ -33,6 +36,11 @@ const gameBoard = (() => {
         while(board.firstChild){
             board.firstChild.remove();
         }
+    }
+
+    function resetGame(){
+        boardElements = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
+        resetBoard();
     }
 
     function tieCheck(){
@@ -95,6 +103,7 @@ const gameBoard = (() => {
     return {
         updateBoard,
         setBoard,
+        resetGame
     }
 })();
 
@@ -102,5 +111,12 @@ function startgame(){
     //Players initialization
     player1 = Player(prompt("Player N1, please introduce you name: "), "X");
     player2 = Player(prompt("Player N2, please introduce you name: "), "O");
+    gameBoard.resetGame();
+    gameBoard.setBoard();
+}
+
+function resetGame(){
+    console.log("game reseted");
+    gameBoard.resetGame();
     gameBoard.setBoard();
 }
