@@ -1,6 +1,7 @@
 const board = document.getElementById('gameBoard');
 const startButton = document.getElementById('startGame');
 const resetButton = document.getElementById('resetGame');
+const displaySection = document.getElementById('display');
 
 startButton.addEventListener('click', startgame);
 resetButton.addEventListener('click', resetGame);
@@ -52,28 +53,36 @@ const gameBoard = (() => {
         }
         //declaring tie if it is a case
         if(tieCheck == 0){
-            console.log("tie");
+            displaySection.textContent = "Its a tie";
+        }
+    }
+
+    function winnerCongratulates(mark){
+        if(mark == "X"){
+            displaySection.textContent = "Congratulation! " + player1.userName + " you are the winner :)"
+        }else{
+            displaySection.textContent = "Congratulation! " + player2.userName + " you are the winner :)"
         }
     }
 
     function winnerCheck(){
         tieCheck();
         if(boardElements[0] == boardElements[1] && boardElements[1] == boardElements[2] && boardElements[1] != " "){
-            console.log("winner");
+            winnerCongratulates(boardElements[0]);
         }else if(boardElements[3] == boardElements[4] && boardElements[4] == boardElements[5] && boardElements[3] != " "){
-            console.log("winner");
+            winnerCongratulates(boardElements[3]);
         }else if(boardElements[6] == boardElements[7] && boardElements[7] == boardElements[8] && boardElements[6] != " "){
-            console.log("winner");
+            winnerCongratulates(boardElements[6]);
         }else if(boardElements[0] == boardElements[3] && boardElements[3] == boardElements[6] && boardElements[6] != " "){
-            console.log("winner");
+            winnerCongratulates(boardElements[0]);
         }else if(boardElements[1] == boardElements[4] && boardElements[4] == boardElements[7] && boardElements[7] != " "){
-            console.log("winner");
+            winnerCongratulates(boardElements[1]);
         }else if(boardElements[2] == boardElements[5] && boardElements[5] == boardElements[8] && boardElements[8] != " "){
-            console.log("winner");
+            winnerCongratulates(boardElements[2]);
         }else if(boardElements[0] == boardElements[4] && boardElements[4] == boardElements[8] && boardElements[8] != " "){
-            console.log("winner");
+            winnerCongratulates(boardElements[0]);
         }else if(boardElements[2] == boardElements[4] && boardElements[4] == boardElements[6] && boardElements[6] != " "){
-            console.log("winner");
+            winnerCongratulates(boardElements[2]);
         }
     }
     
@@ -87,7 +96,6 @@ const gameBoard = (() => {
         if(currentPlayer == undefined){
             currentPlayer = player1;
         }
-        console.log(currentPlayer);
         if(currentPlayer == player1){
             updateBoard(elementIndex, player1.mark);
             currentPlayer = player2;
@@ -116,7 +124,7 @@ function startgame(){
 }
 
 function resetGame(){
-    console.log("game reseted");
+    displaySection.textContent = "";
     gameBoard.resetGame();
     gameBoard.setBoard();
 }

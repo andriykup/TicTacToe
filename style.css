@@ -19,8 +19,12 @@ body h1 {
 }
 
 #gameBoard div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 1px solid black;
     cursor: pointer;
+    font-size: 3.5rem;
 }
 
 #buttons {
@@ -41,7 +45,12 @@ body h1 {
     border: none;
 }
 
-#startGame:hover {
+#startGame:hover, #resetGame:hover{
     background-color: rgba(0, 0, 255, 0.779);
     cursor: pointer;
+}
+
+#display {
+    text-align: center;
+    font-weight: bold;   
 }
