@@ -5,8 +5,8 @@ startButton.addEventListener('click', startgame);
 let player1; //palyer declaration
 let player2; //player declaration
 
-const Player = (userName) => {
-    return {userName};
+const Player = (userName, mark) => {
+    return {userName, mark};
 }
 
 const gameBoard = (() => {
@@ -35,9 +35,24 @@ const gameBoard = (() => {
         }
     }
     
+    let currentPlayer;
     function boardElementClicked(elementIndex) {
-        console.log("element was clicked");
-        updateBoard(elementIndex, 'X');
+        // keeps players from playing in spots that are already taken
+        if(boardElements[elementIndex] != " "){
+            return;
+        } 
+        //check for first round
+        if(currentPlayer == undefined){
+            currentPlayer = player1;
+        }
+        console.log(currentPlayer);
+        if(currentPlayer == player1){
+            updateBoard(elementIndex, player1.mark);
+            currentPlayer = player2;
+        }else{
+            updateBoard(elementIndex, player2.mark);
+            currentPlayer = player1;
+        }
         resetBoard();
         setBoard();
     }
@@ -49,9 +64,8 @@ const gameBoard = (() => {
 })();
 
 function startgame(){
-    //PLayers initialization
-    player1 = Player(prompt("Player N1, please introduce you name: "));
-    player2 = Player(prompt("Player N2, please introduce you name: "));
+    //Players initialization
+    player1 = Player(prompt("Player N1, please introduce you name: "), "X");
+    player2 = Player(prompt("Player N2, please introduce you name: "), "O");
     gameBoard.setBoard();
-
 }
